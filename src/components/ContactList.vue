@@ -12,11 +12,15 @@
       <thead>
         <th>Name</th>
         <th>Email</th>
+        <th></th>
       </thead>
       <tbody>
         <tr v-for="contact in contacts" :key="contact.id">
           <td>{{contact.name}}</td>
           <td>{{contact.email}}</td>
+          <td>
+            <Button @click="deleteContact(contact)">Delete</Button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -39,9 +43,12 @@ export default {
   },
   methods: {
     addContact() {
-      console.log(this.newContact);
       this.contacts.push(this.newContact);
       this.newContact = {};
+    },
+    deleteContact(contact) {
+      let indexOfContactToDelete = this.contacts.indexOf(contact);
+      this.contacts.splice(indexOfContactToDelete, 1);
     }
   }
 }
